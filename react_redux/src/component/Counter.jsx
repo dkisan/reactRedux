@@ -1,36 +1,41 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
+
+import { counterActions } from '../store/index';
+import classes from './Counter.module.css';
 
 const Counter = () => {
-    const value = useSelector(state => state.counter)
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const counter = useSelector((state) => state.counter.counter);
+  const show = useSelector((state) => state.counter.showCounter);
 
-    const incrementHandler = () => {
-        dispatch({ type: 'increment', step: 1 })
-    }
+  const incrementHandler = () => {
+    dispatch(counterActions.increment());
+  };
 
-    const decrementHandler = () => {
-        dispatch({ type: 'decrement', step: 1 })
-    }
+  const increaseHandler = () => {
+    dispatch(counterActions.increase(10));
+  };
 
-    const incrementFiveHandler = () => {
-        dispatch({ type: 'increment', step: 5 })
-    }
+  const decrementHandler = () => {
+    dispatch(counterActions.decrement());
+  };
 
-    const decrementFiveHandler = () => {
-        dispatch({ type: 'decrement', step: 5 })
-    }
+  const toggleCounterHandler = () => {
+    dispatch(counterActions.toggleCounter());
+  };
 
-
-    return (
-        <div>
-            <h1>Redux Counter</h1>
-            <div>{value}</div>
-            <button onClick={incrementHandler}>Increment</button>
-            <button onClick={decrementHandler}>Decrement</button>
-            <button onClick={incrementFiveHandler}>Increment by 5</button>
-            <button onClick={decrementFiveHandler}>Decrement by 5</button>
-        </div>
-    )
-}
+  return (
+    <main className={classes.counter}>
+      <h1>Redux Counter</h1>
+      {show && <div className={classes.value}>{counter}</div>}
+      <div>
+        <button onClick={incrementHandler}>Increment</button>
+        <button onClick={increaseHandler}>Increase by 10</button>
+        <button onClick={decrementHandler}>Decrement</button>
+      </div>
+      <button onClick={toggleCounterHandler}>Toggle Counter</button>
+    </main>
+  );
+};
 
 export default Counter;
