@@ -12,23 +12,33 @@ function App() {
   const cart = useSelector(state => state.cart.cart)
   const dispatch = useDispatch()
 
-  useEffect(()=>{
-    if(initial){
+  useEffect(() => {
+    if (initial) {
       initial = false
+
+      fetch('https://reactcrud-51072-default-rtdb.firebaseio.com/reduxcart.json')
+        .then(async res => {
+          const data = await res.json()
+          dispatch(cartactions.fetchCart(data))
+        })
+        .catch(err => {
+        })
+
       return
-    }
-    dispatch(cartactions.datasend())
-    fetch('https://reactcrud-51072-default-rtdb.firebaseio.com/reduxcart.json',{
-      method:'PUT',
-      body:JSON.stringify(cart)
-    })
-    .then(res=>{
+    } else {
       dispatch(cartactions.datasend())
-    })
-    .catch(err=>{
-    dispatch(cartactions.datasend())
-    })
-  },[cart])
+      fetch('https://reactcrud-51072-default-rtdb.firebaseio.com/reduxcart.json', {
+        method: 'PUT',
+        body: JSON.stringify(cart)
+      })
+        .then(res => {
+          dispatch(cartactions.datasend())
+        })
+        .catch(err => {
+          dispatch(cartactions.datasend())
+        })
+    }
+  }, [cart])
 
   return (
     <Layout>

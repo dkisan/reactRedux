@@ -32,6 +32,14 @@ const cartslice = createSlice({
             state.cart = cart
             state.noofItem += 1
         },
+        fetchCart: (state, action) => {
+            let no = 0
+            for (let i = 0; i < action.payload.length; i++) {
+                no += action.payload[i].quantity
+            }
+            state.cart = action.payload
+            state.noofItem = no
+        },
         removefromCart: (state, action) => {
             let cart = JSON.parse(JSON.stringify(state.cart))
             const isIndex = cart.findIndex(c => c.title === action.payload.title)
