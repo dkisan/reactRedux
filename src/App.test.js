@@ -20,3 +20,14 @@ test('renders "Changed!" if the button was clicked', () => {
     const outputElement = screen.getByText('Sending!');
     expect(outputElement).toBeInTheDocument();
   });
+
+
+
+//   describe('Async component', () => {
+//     test('renders posts if request succeeds', async () => {
+//       render(<Async />)
+  
+//       const listItemElements = await screen.findAllByRole('listitem');
+//       expect(listItemElements).not.toHaveLength(0);
+//     });
+//   });
