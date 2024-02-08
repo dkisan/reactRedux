@@ -12,6 +12,15 @@
   color: white;
 }
 
+.notification{
+  width: 100%;
+  height: max-content;
+  display: flex;
+  justify-content: center;
+  background-color: blue;
+  color: white;
+}
+
 .header ul {
   list-style: none;
   margin: 0;

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialstate = {
     show: false,
+    issending: false,
     cart: [],
     noofItem: 0
 }
@@ -10,6 +11,9 @@ const cartslice = createSlice({
     name: 'cart',
     initialState: initialstate,
     reducers: {
+        datasend: (state) => {
+            state.issending = !state.issending
+        },
         cartToggle: (state) => {
             state.show = !state.show
         },
